@@ -8,6 +8,7 @@ function App() {
   useEffect(() => {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
+    console.log(urlParams);
     const id = urlParams.get('id');
     axios.get(`http://localhost:3009/api/photos/${id}`)
       .then((response) => {
