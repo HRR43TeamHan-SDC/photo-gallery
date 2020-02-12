@@ -42,7 +42,6 @@ class App extends React.Component {
   componentDidMount() {
     const url = window.location.pathname.split('/');
     const id = url[1];
-    console.log(url, id);
     axios.get(`/api/photos/${id}`)
       .then((response) => {
         this.setState({ photos: response.data });

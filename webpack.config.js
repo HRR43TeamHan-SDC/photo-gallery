@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  target: 'node',
+  // target: 'node',
   entry: './client/index.jsx',
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -11,8 +11,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.m?jsx?$/,
-        exclude: /(node-modules)/,
+        test: /\.(js|jsx)$/,
+        exclude: /node-modules/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -26,4 +26,5 @@ module.exports = {
       },
     ],
   },
+  watch: true,
 };
