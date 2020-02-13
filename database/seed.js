@@ -25,7 +25,7 @@ const seed = () => {
     } else {
       counter += 1;
       console.log(counter, 'rows have been inserted');
-      if (counter < 100) {
+      if (counter < 10000000) {
         seed();
       } else {
         db.end(() => 'db connection has been ended');

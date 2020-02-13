@@ -1,6 +1,5 @@
 // import React, { useState, useEffect } from 'react';
 import React from 'react';
-import axios from 'axios';
 import Photos from './Photos.jsx';
 
 // function App() {
@@ -36,17 +35,55 @@ class App extends React.Component {
     super(props);
     this.state = {
       photos: [],
+      date: '',
     };
   }
 
   componentDidMount() {
     const url = window.location.pathname.split('/');
     const id = url[1];
-    axios.get(`/api/photos/${id}`)
+    fetch(`/api/photos/${id}`)
+      .then((res) => res.json())
       .then((response) => {
-        console.log(response.data);
-        // define how many photos will be stored in state here
-        this.setState({ photos: response.data });
+        const {
+          image0,
+          image1,
+          image2,
+          image3,
+          image4,
+          image5,
+          image6,
+          image7,
+          image8,
+          image9,
+          image10,
+          image11,
+          image12,
+          image13,
+          image14,
+        } = response[0];
+        const photosArr = [
+          image0,
+          image1,
+          image2,
+          image3,
+          image4,
+          image5,
+          image6,
+          image7,
+          image8,
+          image9,
+          image10,
+          image11,
+          image12,
+          image13,
+          image14,
+        ];
+
+        const photos = photosArr.filter((photo) => photo);
+        const { date } = response[0];
+
+        this.setState({ photos, date });
       })
       .catch((error) => {
         console.log('error in axios get', error);
@@ -54,7 +91,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { photos } = this.state;
+    const { photos, date } = this.state;
     return (
       <div>
         <h1>
@@ -62,7 +99,7 @@ class App extends React.Component {
           {' '}
           Photos
         </h1>
-        <Photos photos={photos} />
+        <Photos photos={photos} date={date} />
       </div>
     );
   }

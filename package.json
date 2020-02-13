@@ -15,13 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/hrr43-fec6-rey/photo-gallery-service.git"
   },
-  "author": "Tiffany Jalovec",
+  "author": "Tiffany Jalovec & Kent Warren",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/hrr43-fec6-rey/photo-gallery-service/issues"
   },
   "homepage": "https://github.com/hrr43-fec6-rey/photo-gallery-service#readme",
   "dependencies": {
+    "artillery": "^1.6.0-29",
     "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
     "cors": "^2.8.5",

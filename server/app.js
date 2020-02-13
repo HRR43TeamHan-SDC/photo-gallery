@@ -48,6 +48,7 @@ app.get('/api/photos/:id', (req, res) => {
     if (err) {
       console.log('error at app.get', err);
     } else {
+      console.log(Array.isArray(data));
       res.send(data);
     }
   });

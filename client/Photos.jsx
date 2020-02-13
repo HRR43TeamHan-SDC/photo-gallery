@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import '../public/styles.css';
 
-function Photos({ photos }) {
+function Photos({ photos, date }) {
   const [selectedPicture, setSelectedPicture] = useState(0);
   const [showPicture, setShowPicture] = useState(false);
   const [showReport, setShowReport] = useState(false);
@@ -53,8 +53,8 @@ function Photos({ photos }) {
           onKeyPress={handleClick.bind(this, index)}
           title="Restaurant, City, State"
           className={`img ${classList[index]}`}
-          key={photo.id}
-          src={photo.image}
+          key={photo}
+          src={photo}
           alt="Smiley face"
         />
       );
@@ -93,7 +93,7 @@ function Photos({ photos }) {
           </div>
           <div>
             <div>
-              <img className="img4" src={photos[selectedPicture].image} alt="hello" />
+              <img className="img4" src={photos[selectedPicture]} alt="hello" />
               <div className={showReport ? 'show-report' : 'hide-report'}>
                 <h4>  Report a photo problem</h4>
                 <button onClick={closeReport} className="report-button" type="button">Unrelated to restaurant</button>
@@ -119,7 +119,7 @@ function Photos({ photos }) {
                   <div className="dined-on">
                     Dined on
                     {' '}
-                    {photos[selectedPicture].date}
+                    {date}
                   </div>
                 </div>
                 <div
@@ -164,10 +164,12 @@ function Photos({ photos }) {
 
 Photos.defaultProps = {
   photos: [],
+  date: '',
 };
 
 Photos.propTypes = {
-  photos: PropTypes.arrayOf(PropTypes.object),
+  photos: PropTypes.arrayOf(PropTypes.string),
+  date: PropTypes.string,
 };
 
 export default Photos;
