@@ -13,7 +13,7 @@ module.exports = {
     "jest": true,
     "commonjs": true
     },
-    //"ignorePatterns": ["bundle.js", "node_modules"],
+    "ignorePatterns": ["database/data/"],
     "rules": {
     "no-console": "off",
     "import/extensions": "off"

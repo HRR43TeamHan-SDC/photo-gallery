@@ -44,6 +44,8 @@ class App extends React.Component {
     const id = url[1];
     axios.get(`/api/photos/${id}`)
       .then((response) => {
+        console.log(response.data);
+        // define how many photos will be stored in state here
         this.setState({ photos: response.data });
       })
       .catch((error) => {
