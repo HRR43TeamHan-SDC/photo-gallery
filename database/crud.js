@@ -63,7 +63,7 @@ module.exports = {
     module.exports.read(params[0], (err, record) => {
       if (err) {
         callback(err, null, null);
-      } else {
+      } else { // find column to update
         const keys = Object.keys(record[0]);
         let column;
         for (let key = 0; key < keys.length; key += 1) {
@@ -89,13 +89,6 @@ module.exports = {
                 callback(null, updatedRecord, null);
               }
             });
-            // db.query(`SELECT * FROM photos WHERE id=${params[0]}`, (er, updatedRecord) => {
-            //   if (er) {
-            //     callback(er, null, null);
-            //   } else {
-            //     callback(null, updatedRecord, null);
-            //   }
-            // });
           }
         });
       }
