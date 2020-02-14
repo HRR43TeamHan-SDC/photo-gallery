@@ -1,12 +1,19 @@
 config:
   target: 'http://localhost:3009'
   phases:
+    - duration: 30
+      arrivalRate: 10
+      rampTo: 1000
+      name: "Warm up"
+    # - duration: 300
+    #   arrivalRate: 1000
+    #   name: "Sustain"
     - duration: 60
-      arrivalRate: 20
+      arrivalRate: 1000
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'
 scenarios:
   - flow:
     - get:
-        url: "/api/photos/10000000"
+        url: "/api/photos/9876543"

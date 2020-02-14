@@ -1,5 +1,16 @@
 const db = require('./index.js');
 
+/*
+Seeded MySQL with the script below.
+Exported 10M records from MySQL Workbench to CSV and JSON.
+
+Seeded MongoDB with CSV file using the following command
+  mongoimport --db=photoGallery --collection=photos --type=csv
+  --headerline --file=photoGallery10000000.csv
+
+Still researching second database, but most likely will choose PostgreSQL.
+*/
+
 let counter = 0;
 const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 const year = ['2017', '2018', '2019', '2020'];
@@ -28,7 +39,7 @@ const seed = () => {
       if (counter < 10000000) {
         seed();
       } else {
-        db.end(() => 'db connection has been ended');
+        db.end(() => console.log('db connection has been ended'));
       }
     }
   });
