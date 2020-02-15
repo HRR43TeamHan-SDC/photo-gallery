@@ -81,7 +81,7 @@ class App extends React.Component {
         ];
 
         const photos = photosArr.filter((photo) => photo);
-        const { date } = response[0];
+        const { date } = response[0].replace(/-/, ', ');
 
         this.setState({ photos, date });
       })

@@ -1,7 +1,7 @@
 const db = require('./index.js');
 
 /*
-Seeded MySQL with the script below.
+Seeded MySQL with the script below so that I could stress test it for a base metric.
 Exported 10M records from MySQL Workbench to CSV and JSON.
 
 Seeded MongoDB with CSV file using the following command
@@ -9,6 +9,9 @@ Seeded MongoDB with CSV file using the following command
   --headerline --file=photoGallery10000000.csv
 
 Still researching second database, but most likely will choose PostgreSQL.
+
+Included an alternative seeding script to meet the requirement.
+(see ../data/csvGenerationScript.js)
 */
 
 let counter = 0;

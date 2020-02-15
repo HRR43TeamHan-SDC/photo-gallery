@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
+const { MongoClient } = require('mongodb');
 const db = require('../database/MySQL/crud.js');
+
+const client = new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true });
 
 const app = express();
 app.use(morgan('dev'));
@@ -11,7 +14,7 @@ app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.j
 app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 
 
-// POST -- create new record
+// POST -- create new record -- MySQL
 app.post('/api/photos', (req, res) => {
   const params = [
     req.body.image0,
@@ -44,18 +47,40 @@ app.post('/api/photos', (req, res) => {
 
 // GET
 app.get('/api/photos/:id', (req, res) => {
-  db.read(req.params.id, (err, data) => {
-    if (err) {
-      console.log('error at app.get', err);
+  // MongoDB
+  const id = { id: parseInt(req.params.id, 10) };
+
+  client.connect((e) => {
+    if (e) {
+      console.log(e);
+      client.close();
     } else {
-      console.log(Array.isArray(data));
-      res.send(data);
+      client.db('photoGallery').collection('photos').findOne(id)
+        .then((err, data) => {
+          if (err) {
+            console.log('error at app.get mongodb findOne', err);
+            res.send(err);
+          } else {
+            console.log('data:', data);
+            res.send(data);
+          }
+        })
+        .catch((er) => console.log('error at app.get', er));
     }
   });
+
+  // MySQL -- GET
+  // db.read(req.params.id, (err, data) => {
+  //   if (err) {
+  //     console.log('error at app.get', err);
+  //   } else {
+  //     res.send(data);
+  //   }
+  // });
 });
 
 
-// PUT
+// PUT -- MySQL
 app.put('/api/photos/:id', (req, res) => {
   if (req.body.oldImage && req.body.newImage) { // swap photo in column where column is not null
     const params = [req.params.id, req.body.oldImage, req.body.newImage];
@@ -83,7 +108,7 @@ app.put('/api/photos/:id', (req, res) => {
 });
 
 
-// DELETE -- delete entire record
+// DELETE -- delete entire record -- MySQL
 app.delete('/api/photos/:id', (req, res) => {
   const { id } = req.params;
 
