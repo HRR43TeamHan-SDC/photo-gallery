@@ -80,8 +80,8 @@ class App extends React.Component {
           image14,
         ];
 
-        const photos = photosArr.filter((photo) => photo);
-        const { date } = response[0].replace(/-/, ', ');
+        const photos = photosArr.filter((photo) => photo !== 'null');
+        const date = response[0].date.replace(/-/, ', ');
 
         this.setState({ photos, date });
       })
