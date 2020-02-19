@@ -1,6 +1,14 @@
 // Seed MongoDB with CSV file using the following command
-//   mongoimport --db=photoGallery --collection=photos --type=csv
-//   --headerline --file=<filename>.csv
+// from normal terminal prompt -- not mongo or mongod
+// mongoimport --db=photoGallery --collection=photos --type=csv
+// --headerline --file=<filename>.csv
+
+// export command
+// from normal terminal prompt -- not mongo or mongod
+// mongoexport --db=photoGallery --collection=photos --type=csv
+// --fields=id,image0,image1,image2,image3,image4,image5,image6,image7,image8,
+// image9,image10,image11,image12,image13,image14,date
+// --out=/Users/kennethwarren/Downloads/mongoExport.csv
 
 
 // indexing database script

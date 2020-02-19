@@ -1,11 +1,10 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const { MongoClient } = require('mongodb');
 const db = require('../database/MySQL/crud.js');
+const client = require('../database/mongoDB/index.js');
+// const pool = require('../database/PostgreSQL/index.js');
 
-const client = new MongoClient('mongodb://localhost:27017', { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect();
 
 const app = express();
 app.use(morgan('dev'));
@@ -48,32 +47,44 @@ app.post('/api/photos', (req, res) => {
 
 // GET
 app.get('/api/photos/:id', (req, res) => {
-  // MongoDB
-  const id = parseInt(req.params.id, 10);
-  if (typeof id !== 'number') {
-    res.sendStatus(400);
-    return;
-  }
+  // PostgreSQL
+  // const query = {
+  //   text: 'SELECT * FROM photos WHERE id = $1',
+  //   values: [req.params.id],
+  // };
+  // pool.query(query)
+  //   .then((data) => {
+  //     if (data.rows.length === 0) {
+  //       console.log('error--data is null:', data);
+  //       res.sendStatus(400);
+  //     } else {
+  //       res.send(data.rows);
+  //     }
+  //   })
+  //   .catch(() => res.sendStatus(400));
 
-  client.db('photoGallery').collection('photos').findOne({ id })
+
+  // MongoDB
+  client.db('photoGallery').collection('photos').findOne({ id: parseInt(req.params.id, 10) })
     .then((data) => {
       if (data === null) {
         console.log('error--data is null:', data);
         res.sendStatus(400);
       } else {
-        res.send(data);
+        res.send([data]);
       }
     })
     .catch((er) => console.log('error at app.get', er));
 
-  // MySQL -- GET
-  // db.read(req.params.id, (err, data) => {
-  //   if (err) {
-  //     console.log('error at app.get', err);
-  //   } else {
-  //     res.send(data);
-  //   }
-  // });
+
+//   MySQL -- GET
+//   db.read(req.params.id, (err, data) => {
+//     if (err) {
+//       console.log('error at app.get', err);
+//     } else {
+//       res.send(data);
+//     }
+//   });
 });
 
 
