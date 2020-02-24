@@ -1,11 +1,11 @@
 config:
   target: 'http://localhost:3009'
   phases:
-    - duration: 30
-      arrivalCount: 1000
-      name: "Warm up test"
-    - duration: 60
-      arrivalCount: 6000
+    # - duration: 120
+    #   arrivalCount: 12000
+    #   name: "Warm up test"
+    - duration: 300
+      arrivalCount: 30000
       name: "Sustain max load test"
   defaults:
     headers:

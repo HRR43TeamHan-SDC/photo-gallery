@@ -4001,11 +4001,11 @@ const cleanAPIdata = [
   {
     'id': 999,
     'photo': 'https://images.pexels.com/photos/2299028/pexels-photo-2299028.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'
-  },
-  {
-    'id': 1000,
-    'photo': 'https://images.pexels.com/photos/3054690/pexels-photo-3054690.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'
-  }
+  } // ,
+  // {
+  //   'id': 1000,
+  //   'photo': 'https://images.pexels.com/photos/3054690/pexels-photo-3054690.jpeg?auto=compress&cs=tinysrgb&h=650&w=940'
+  // }
 ];
 
 

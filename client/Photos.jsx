@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import '../public/styles.css';
+// import '../public/styles.css';
 
 function Photos({ photos, date }) {
   const [selectedPicture, setSelectedPicture] = useState(0);

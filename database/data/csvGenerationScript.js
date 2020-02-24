@@ -11,14 +11,14 @@ const generateData = () => {
   // create data for the columns of a single row
   // ensure at least 10 photos
   for (let i = 0; i < 10; i += 1) {
-    data += `https://photo-gallery-service.s3.amazonaws.com/${Math.floor(Math.random() * 1000)}.jpeg` + ',';
+    data += `https://photogalleryservice.s3.us-east-2.amazonaws.com/${Math.floor(Math.random() * 1000)}.jpeg` + ',';
   }
 
   // randomize remaining 5 photos
   for (let i = 0; i < 5; i += 1) {
     const boolean = Math.floor(Math.random() * 2);
     if (boolean) {
-      data += `https://photo-gallery-service.s3.amazonaws.com/${Math.floor(Math.random() * 1000)}.jpeg` + ',';
+      data += `https://photogalleryservice.s3.us-east-2.amazonaws.com/${Math.floor(Math.random() * 1000)}.jpeg` + ',';
     } else {
       data += 'null,';
     }

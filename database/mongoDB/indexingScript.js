@@ -1,7 +1,7 @@
+/* eslint-disable */
 // Seed MongoDB with CSV file using the following command
 // from normal terminal prompt -- not mongo or mongod
-// mongoimport --db=photoGallery --collection=photos --type=csv
-// --headerline --file=<filename>.csv
+/* eslint-disable-line */ // mongoimport --db=photoGallery --collection=photos --type=csv --headerline --file=photoGalleryData.csv
 
 // export command
 // from normal terminal prompt -- not mongo or mongod
@@ -16,7 +16,6 @@
 // const { MongoClient } = require('mongodb');
 
 // const client = new MongoClient('mongodb://localhost:27017', { useUnifiedTopology: true });
-
 
 // const createIndex = () => {
 //   client.connect((err) => {
@@ -38,3 +37,30 @@
 // };
 
 // createIndex();
+
+
+// delete posts after stress testing
+// client.connect((er) => {
+//   if (er) {
+//     console.log('error connecting to database', er);
+//     client.close();
+//   } else {
+//     const deleteAfter10M = () => {
+//       client.db('photoGallery').collection('photos').deleteMany({ date: 'October 6-2021' })
+//         .then((result) => {
+//           if (result.deletedCount > 0) {
+//             console.log('success!');
+//             client.close();
+//           } else {
+//             console.log('deleteCount !== 1');
+//             client.close();
+//           }
+//         })
+//         .catch((err) => {
+//           console.log(err);
+//           client.close();
+//         });
+//     };
+//     deleteAfter10M();
+//   }
+// });
