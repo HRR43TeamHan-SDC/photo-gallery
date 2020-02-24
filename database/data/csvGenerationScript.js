@@ -27,7 +27,7 @@ const generateData = () => {
   const date = `${month[Math.floor(Math.random() * 12)]} ${Math.ceil(Math.random() * 30)}-${year[Math.floor(Math.random() * 4)]}\n`;
   data += date;
 
-  fs.writeFile('../../../../Downloads/photoGalleryData.csv', data, {flag: 'a'}, (err) => {
+  fs.writeFile('../../photoGalleryData.csv', data, {flag: 'a'}, (err) => {
     if (err) {
       console.error(err);
       return;
@@ -47,7 +47,7 @@ const generateHeaders = () => {
   const data = 'id,image0,image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14,date\n';
 
   // create headers
-  fs.writeFile('../../../../Downloads/photoGalleryData.csv', data, (err) => {
+  fs.writeFile('../../photoGalleryData.csv', data, (err) => {
     if (err) {
       console.error(err);
     } else {
