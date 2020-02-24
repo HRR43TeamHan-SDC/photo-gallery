@@ -1,25 +1,67 @@
 const express = require('express');
 const path = require('path');
-const { Readable } = require('stream');
 const morgan = require('morgan');
 const db = require('../database/MySQL/crud.js');
 const client = require('../database/mongoDB/index.js');
-const pool = require('../database/PostgreSQL/index.js');
+// const pool = require('../database/PostgreSQL/index.js');
 
 
 const app = express();
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
 app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 
 
+// GET
+app.get('/api/photos/:id', (req, res) => {
+  // PostgreSQL
+  // const query = {
+  //   text: 'SELECT * FROM photos WHERE id = $1',
+  //   values: [req.params.id],
+  // };
+  // pool.query(query)
+  //   .then((data) => {
+  //     if (data.rows.length === 0) {
+  //       console.log('error--data is null:', data);
+  //       res.sendStatus(400);
+  //     } else {
+  //       res.send(data.rows);
+  //     }
+  //   })
+  //   .catch(() => res.sendStatus(400));
+
+
+  // MongoDB
+  client.db('photoGallery').collection('photos').findOne({ id: parseInt(req.params.id, 10) })
+    .then((data) => {
+      if (data === null) {
+        console.log('error--data is null:', data);
+        res.sendStatus(400);
+      } else {
+        res.send([data]);
+      }
+    })
+    .catch((er) => console.log('error at app.get', er));
+
+
+//   MySQL -- GET
+//   db.read(req.params.id, (err, data) => {
+//     if (err) {
+//       console.log('error at app.get', err);
+//     } else {
+//       res.send(data);
+//     }
+//   });
+});
+
+
 // POST -- create new record
 app.post('/api/photos', (req, res) => {
   // PostgreSQL
   // const insertQuery = {
-  //   text: 'INSERT INTO photos(id,image0,image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14,date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *', /* eslint-disable-line */
+  /* eslint-disable-line */ //   text: 'INSERT INTO photos(id,image0,image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14,date) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17) RETURNING *',
   //   values: [
   //     -1,
   //     req.body.image0,
@@ -109,49 +151,6 @@ app.post('/api/photos', (req, res) => {
   //     res.send(newRecord);
   //   }
   // });
-});
-
-
-// GET
-app.get('/api/photos/:id', (req, res) => {
-  // PostgreSQL
-  // const query = {
-  //   text: 'SELECT * FROM photos WHERE id = $1',
-  //   values: [req.params.id],
-  // };
-  // pool.query(query)
-  //   .then((data) => {
-  //     if (data.rows.length === 0) {
-  //       console.log('error--data is null:', data);
-  //       res.sendStatus(400);
-  //     } else {
-  //       res.send(data.rows);
-  //     }
-  //   })
-  //   .catch(() => res.sendStatus(400));
-
-
-  // MongoDB
-  client.db('photoGallery').collection('photos').findOne({ id: parseInt(req.params.id, 10) })
-    .then((data) => {
-      if (data === null) {
-        console.log('error--data is null:', data);
-        res.sendStatus(400);
-      } else {
-        res.send([data]);
-      }
-    })
-    .catch((er) => console.log('error at app.get', er));
-
-
-//   MySQL -- GET
-//   db.read(req.params.id, (err, data) => {
-//     if (err) {
-//       console.log('error at app.get', err);
-//     } else {
-//       res.send(data);
-//     }
-//   });
 });
 
 

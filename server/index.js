@@ -1,6 +1,7 @@
 // require('newrelic');
 const app = require('./app.js');
 
-app.listen(3009, () => {
-  console.log('Listening on port 3009');
+const PORT = process.env.PORT || 3009;
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
 });
