@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-const db = require('../database/MySQL/crud.js');
+// const db = require('../database/MySQL/crud.js');
 const client = require('../database/mongoDB/index.js');
 // const pool = require('../database/PostgreSQL/index.js');
 
