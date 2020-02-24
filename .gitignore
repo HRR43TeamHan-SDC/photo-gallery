@@ -6,6 +6,8 @@ npm
 npm-debug.log
 node_modules
 newrelic.js
+database/MySQL
+database/PostgreSQL
 
 pids
 *.pid
