@@ -12,6 +12,7 @@ app.use(express.json());
 
 app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
 app.use('/:id', express.static(path.resolve(__dirname, '../public')));
+app.use('/loaderio*', express.static(path.resolve(__dirname, '../loaderio.txt')));
 
 
 // GET
