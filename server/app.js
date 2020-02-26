@@ -41,6 +41,7 @@ app.get('/api/photos/:id', (req, res) => {
         console.log('error--data is null:', data);
         res.sendStatus(400);
       } else {
+        res.set('Access-Control-Allow-Origin', '*'); // for fancy-pants Jordan 🤣
         res.send([data]);
       }
     })
