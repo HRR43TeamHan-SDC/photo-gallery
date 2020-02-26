@@ -1,18 +1,18 @@
 const express = require('express');
 const path = require('path');
-const morgan = require('morgan');
+// const morgan = require('morgan');
 // const db = require('../database/MySQL/crud.js');
 const client = require('../database/mongoDB/index.js');
 // const pool = require('../database/PostgreSQL/index.js');
 
 
 const app = express();
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
-app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 app.use('/loaderio*', express.static(path.resolve(__dirname, '../loaderio.txt')));
+app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 
 
 // GET

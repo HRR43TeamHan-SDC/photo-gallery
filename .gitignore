@@ -26,3 +26,4 @@ build/
 dist/
 
 databaseTesting
+URI.js
