@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const zlib = require('zlib');
 // const morgan = require('morgan');
 // const db = require('../database/MySQL/crud.js');
 const client = require('../database/mongoDB/index.js');
@@ -10,7 +12,13 @@ const app = express();
 // app.use(morgan('dev'));
 app.use(express.json());
 
-app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
+// app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
+app.get('/bundle.js', (req, res) => {
+  const gzip = zlib.createGzip();
+  const bundle = fs.createReadStream(path.resolve(__dirname, '../public/bundle.js'));
+  res.set({ 'Content-Encoding': 'gzip' });
+  bundle.pipe(gzip).pipe(res);
+});
 app.use('/styles.css', express.static(path.resolve(__dirname, '../public/styles.css')));
 app.use('/loaderio*', express.static(path.resolve(__dirname, '../loaderio.txt')));
 app.use('/:id', express.static(path.resolve(__dirname, '../public')));
