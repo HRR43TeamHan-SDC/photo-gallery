@@ -11,6 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/bundle.js', express.static(path.resolve(__dirname, '../public/bundle.js')));
+app.use('/styles.css', express.static(path.resolve(__dirname, '../public/styles.css')));
 app.use('/loaderio*', express.static(path.resolve(__dirname, '../loaderio.txt')));
 app.use('/:id', express.static(path.resolve(__dirname, '../public')));
 
